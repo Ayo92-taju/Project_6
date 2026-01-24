@@ -1,2 +1,2 @@
-# Project_7
-Word counter
+# Project_6
+Contact List
