@@ -4,7 +4,7 @@ class Contact:
         self.number = number
         
     def display(self, index = None):
-        if index:
+        if index is not None:
             print(f"{index}. {self.name} | {self.number}")
         else:
             print(f"{self.name} | {self.number}")
@@ -15,15 +15,13 @@ class ContactManager:
     
     def add_contact(self):
         try:
-            number = int(input("Enter number: "))
+            number = input("Enter number: ")
             name = input("Enter contact name: ")
             
             contact = Contact(name, number)
             self.contacts.append(contact)
             print("Contact added!")
         
-        except ValueError:
-            print("Invalid input")
         except Exception as e:
             print(f"An unexpected error occurred: {e}\n")
     
@@ -48,10 +46,8 @@ class ContactManager:
                         found = True
 
                 if not found:
-                        print("Contact not found")
+                    print("Contact not found")
             
-            except ValueError:
-                print("Invalid input")
             except Exception as e:
                 print(f"An unexpected error occurred: {e}\n")
             
@@ -67,13 +63,14 @@ class ContactManager:
                         contact.display(i)
                         
                     con = int(input("Enter contact ID you would like to edit: "))
-                    number = int(input("Enter number: "))
-                    name = input("Enter contact name: ")
                     if 1 <= con <= len(self.contacts):
-                        update = Contact(name, number)
-                        self.contacts[con - 1] = update
+                        number = input("Enter number: ")
+                        name = input("Enter contact name: ")
+                        contact = self.contacts[con - 1]
+                        contact.name = name
+                        contact.number = number
                         
-                        print(f"Updated {update.name}")
+                        print(f"Updated {contact.name}")
                         break
                     elif con == 0:
                         break
@@ -81,8 +78,6 @@ class ContactManager:
                         print("Please select a contact ID from the list provided")
                         continue
             
-            except ValueError:
-                print("Invalid input")
             except Exception as e:
                 print(f"An unexpected error occurred: {e}\n")
                 
@@ -106,12 +101,12 @@ class ContactManager:
                         print("Please select a contact ID from the list provided")
                         continue
             
-            except ValueError:
-                print("Invalid input")
+            except Exception as e:
+                print(f"An unexpected error occurred: {e}\n")
     
     def menu(self):
         while True:
-            print("Select option: ")
+            print("\nSelect option: ")
             print("1. Add Contact")
             print("2. View Contacts")
             print("3. Search Contacts")
@@ -141,8 +136,6 @@ class ContactManager:
                 else:
                     print("Please select 1-6 from the options provided")
                     continue
-            except ValueError:
-                print("Invalid input")
             except Exception as e:
                 print(f"An unexpected error occurred: {e}\n")
                 
