@@ -75,7 +75,7 @@ def delete(contacts):
             
 def edit(contacts):
     if not contacts:
-        ("No contacts")
+        print("No contacts")
     else:
         while True:
             for i, contact in enumerate(contacts, start = 1):
@@ -97,10 +97,8 @@ def edit(contacts):
         
             
 def search(contacts):
-    while True:
         if not contacts:
             print("No contacts entered")
-            break
         else:
             find_name = input("Please enter name to search: ").lower()
             
@@ -112,7 +110,6 @@ def search(contacts):
                     found = False
             if not found:
                     print("Contact not found")
-                    break
-            break
+                    
 print("Contact List\n")
 menu()
