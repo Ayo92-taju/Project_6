@@ -15,7 +15,7 @@ class ContactManager:
     
     def add_contact(self):
         try:
-            number = input("Enter number: ")
+            number = input("\nEnter number: ")
             name = input("Enter contact name: ")
             
             contact = Contact(name, number)
@@ -27,7 +27,7 @@ class ContactManager:
     
     def view_contacts(self):
         if not self.contacts:
-            print("No contacts added")
+            print("\nNo contacts added")
         else:
             print("\nContact List:")
             for i, contact in enumerate(self.contacts, start = 1):
@@ -35,10 +35,10 @@ class ContactManager:
     
     def search_contact(self):
         if not self.contacts:
-            print("No contacts entered")
+            print("\nNo contacts entered")
         else:
             try:
-                find_name = input("Please enter name to search: ").lower()
+                find_name = input("\nPlease enter name to search: ").lower()
                 found = False
                 for contact in self.contacts:
                     if find_name in contact.name.lower():
@@ -54,7 +54,7 @@ class ContactManager:
     
     def edit_contact(self):
         if not self.contacts:
-            print("No contacts")
+            print("\nNo contacts")
         
         else:
             try:
@@ -62,7 +62,7 @@ class ContactManager:
                     for i, contact in enumerate(self.contacts, start = 1):
                         contact.display(i)
                         
-                    con = int(input("Enter contact ID you would like to edit: "))
+                    con = int(input("\nEnter contact ID you would like to edit: "))
                     if 1 <= con <= len(self.contacts):
                         number = input("Enter number: ")
                         name = input("Enter contact name: ")
@@ -83,14 +83,14 @@ class ContactManager:
                 
     def delete_contact(self):
         if not self.contacts:
-            print("No contacts to delete")
+            print("\nNo contacts to delete")
         else:
             try:
                 while True:
                     for i, contact in enumerate(self.contacts, start = 1):
                         contact.display(i)
                     
-                    con = int(input("Enter contact ID you would like to delete: "))
+                    con = int(input("\nEnter contact ID you would like to delete: "))
                     if 1 <= con <= len(self.contacts):
                         removed = self.contacts.pop(con - 1)
                         print(f"{removed.name} deleted.")
@@ -139,5 +139,6 @@ class ContactManager:
             except Exception as e:
                 print(f"An unexpected error occurred: {e}\n")
                 
-manager = ContactManager()
-manager.menu()
+app = ContactManager()
+if __name__ == "__main__":
+    app.menu()
