@@ -1,10 +1,13 @@
 class Contact:
-    def __init__(self, name, numebr):
+    def __init__(self, name, number):
         self.name = name
-        self.number = numebr
+        self.number = number
         
-    def display(self):
-        print(f"{self.name} | {self.number}")
+    def display(self, index = None):
+        if index:
+            print(f"{index}. {self.name} | {self.number}")
+        else:
+            print(f"{self.name} | {self.number}")
         
 class ContactManager:
     def __init__(self):
@@ -30,7 +33,7 @@ class ContactManager:
         else:
             print("\nContact List:")
             for i, contact in enumerate(self.contacts, start = 1):
-                print(f"{i}. {contact.name} | {contact.number}")
+                contact.display(i)
     
     def search_contact(self):
         if not self.contacts:
@@ -38,11 +41,13 @@ class ContactManager:
         else:
             try:
                 find_name = input("Please enter name to search: ").lower()
-                
+                found = False
                 for contact in self.contacts:
                     if find_name in contact.name.lower():
-                        print(f"{contact.name} | {contact.number}")
-                    else:
+                        contact.display()
+                        found = True
+
+                if not found:
                         print("Contact not found")
             
             except ValueError:
@@ -59,7 +64,8 @@ class ContactManager:
             try:
                 while True:
                     for i, contact in enumerate(self.contacts, start = 1):
-                        print(f"{i}. {contact.name} | {contact.number}")
+                        contact.display(i)
+                        
                     con = int(input("Enter contact ID you would like to edit: "))
                     number = int(input("Enter number: "))
                     name = input("Enter contact name: ")
@@ -87,12 +93,12 @@ class ContactManager:
             try:
                 while True:
                     for i, contact in enumerate(self.contacts, start = 1):
-                        print(f"{i}. {contact.name} | {contact.number}")
+                        contact.display(i)
                     
                     con = int(input("Enter contact ID you would like to delete: "))
                     if 1 <= con <= len(self.contacts):
-                        print(f"{contact.name(con - 1)} deleted!")
-                        self.contacts.pop(con - 1)
+                        removed = self.contacts.pop(con - 1)
+                        print(f"{removed.name} deleted.")
                         break
                     elif con == 0:
                         break
@@ -133,7 +139,7 @@ class ContactManager:
                 elif select == 6:
                     break
                 else:
-                    print("Please select 1-5 from the options provided")
+                    print("Please select 1-6 from the options provided")
                     continue
             except ValueError:
                 print("Invalid input")
